@@ -1,0 +1,11 @@
+Font: 
+
+
+Color:{
+    Main color: #007B82;
+    Second color: ;
+}
+
+link about my template html{
+    https://startup.nextjstemplates.com/
+}

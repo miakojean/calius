@@ -1,0 +1,26 @@
+# Environnement virtuel
+env/
+venv/
+.calius_env/
+
+# Fichiers Python
+*.pyc
+__pycache__/
+
+# Fichiers de configuration
+*.env
+*.sqlite3
+
+# Dossiers de logs
+logs/
+*.log
+
+# Static et médias générés
+staticfiles/
+media/
+
+# Fichiers de migration
+**/migrations/
+
+# Configuration locale
+.DS_Store
