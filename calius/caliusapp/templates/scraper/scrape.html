@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    {% if image_url %}
+        <img src="{{ image_url }}" alt="{{ title }}" width="250">
+    {% else %}
+        <p>Aucune image disponible.</p>
+    {% endif %}
+    <br>
+    <a href="{% url 'scrape_city' %}">Retour à la recherche</a>
+</body>
+</html>

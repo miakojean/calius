@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraping</title>
+</head>
+<body style="display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: Arial, sans-serif; background-color: #f9f9f9;">
+
+    <section style="padding: 2rem; max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h1 style="font-size: 1.5rem; color: #333;">Search for Jumia Products</h1>
+        </div>
+
+        <form action="" method="get" style="display: flex; flex-direction: column; gap: 1rem;">
+            <label for="product" style="font-size: 1rem; color: #555;">Product Name</label>
+            <input type="text" id="product" name="product" placeholder="Search your products"
+                   value="{{ request.GET.product }}"
+                   style="padding: 0.75rem; font-size: 1rem; border: 1px solid #ddd; border-radius: 4px; width: 100%;">
+
+            <button type="submit" style="padding: 0.75rem; font-size: 1rem; background-color: #5c48ee; color: #ffffff; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s;">
+                Search
+            </button>
+        </form>
+        
+        {% if product_info_list %}
+            <div style="margin-top: 2rem;">
+                {% for product_info in product_info_list %}
+                    <div style="border-bottom: 1px solid #ddd; padding: 1rem 0;">
+                        <img src="{{ product_info.image_url }}" alt="{{ product_info.name }}" style="width: 100px; height: auto; border-radius: 4px;">
+                        <h2 style="font-size: 1.2rem; color: #333;">{{ product_info.name }}</h2>
+                        <p style="color: #5c48ee; font-size: 1.1rem; font-weight: bold;">{{ product_info.price }}</p>
+                        <p style="color: #555;">Rating: {{ product_info.rating }} / 5</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+            
+    </section>
+
+</body>
+</html>

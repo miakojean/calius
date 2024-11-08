@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Recherche de Ville sur Wikipedia</title>
+</head>
+<body>
+    <h1>Recherche de Ville</h1>
+    <form method="post" action="{% url 'scrape_city' %}">
+        {% csrf_token %}
+        <label for="city">Nom de la ville :</label>
+        <input type="text" id="city" name="city" placeholder="Entrez une ville (ex: Paris)">
+        <button type="submit">Rechercher</button>
+    </form>
+</body>
+</html>
