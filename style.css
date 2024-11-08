@@ -15,6 +15,13 @@
 
 }
 
+hr {
+    border: none; /* Supprimer le style par défaut */
+    border-top: 2px solid #004e82; /* Couleur du trait */
+    width: 80%; /* Largeur du trait */
+    margin: 20px auto; /* Espacement et centrage */
+}
+
 img{
     max-width: 350px;
     max-height: 320px;
@@ -216,7 +223,7 @@ body{
 /*Section header*/
 
 .section_header{
-    padding-top: 4rem;
+    padding-top: 2rem;
 }
 
 .section_header h2{
