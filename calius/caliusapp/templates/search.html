@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche de Publicités Facebook</title>
+    <style>
+        /* Style général de la page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #5c48ee;
+        }
+
+        form {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border: 2px solid #5c48ee;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #0f1e6a;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #5c48ee;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0f1e6a;
+        }
+
+        hr {
+            width: 100%;
+            border: none;
+            border-top: 2px solid #ddd;
+            margin: 20px 0;
+        }
+
+        /* Style pour les résultats */
+        .results {
+            width: 80%;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .results ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .results li {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .results li:last-child {
+            border-bottom: none;
+        }
+
+        .results h3 {
+            margin: 0 0 10px;
+            color: #0f1e6a;
+        }
+
+        .results p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .no-results {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recherche de Publicités Facebook</h1>
+    
+    <!-- Formulaire de recherche -->
+    <form method="get" action="{% url 'search_facebook_ads' %}">
+        <input type="text" name="query" placeholder="Rechercher des produits" value="{{ query }}" required>
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <hr>
+
+    <!-- Affichage des résultats -->
+    <div class="results">
+        {% if ads %}
+            <h2>Résultats pour "{{ query }}"</h2>
+            <ul>
+                {% for ad in ads %}
+                    <li>
+                        <h3>{{ ad.advertiser_name }}</h3>
+                        <p><strong>Titre :</strong> {{ ad.title }}</p>
+                        <p>{{ ad.ad_creative_body }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="no-results">
+                <p>Aucune publicité trouvée pour "{{ query }}".</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
