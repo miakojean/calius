@@ -1,0 +1,2 @@
+Conditions de service - Version de Test
+Cette application est actuellement en phase de développement et est destinée uniquement à des fins de test interne. Les conditions de service définitives seront publiées lorsque l'application sera prête pour la production.
