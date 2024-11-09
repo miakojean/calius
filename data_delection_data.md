@@ -1,5 +1,9 @@
 # Politique de suppression des données
 
-Cette application est actuellement en développement pour des tests uniquement. Aucune donnée utilisateur n'est stockée de manière permanente. Toutes les données collectées à des fins de test sont effacées automatiquement après chaque session de test ou lorsque les utilisateurs le demandent.
+Cette application est en développement pour des tests uniquement. Les données utilisateur collectées sont temporaires et effacées après chaque session de test.
 
-Si l'application est mise en production, cette politique sera mise à jour pour garantir la suppression des données en conformité avec les réglementations applicables.
+## Procédure de suppression des données
+
+Si un utilisateur souhaite que ses données soient supprimées immédiatement, il peut en faire la demande en contactant notre équipe à l'adresse : support@votreapp.com.
+
+Cette politique sera mise à jour pour la conformité complète lorsque l'application sera en production.
