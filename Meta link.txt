@@ -1,0 +1,13 @@
+Mes liens concernant les termes de services (terms_of_service), politique privée des données (privacy_policy)
+et la politique de suppression des données (data_delection_data)
+
+privacy policy: https://github.com/miakojean/calius/blob/main/privacy_policy.md
+
+terms_of_service: https://github.com/miakojean/calius/blob/main/terms_of_service.md
+
+data_delection_data: https://miakojean.github.io/calius/
+
+
+
+
+

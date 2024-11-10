@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Informations de l'utilisateur Meta</h1>
+    {% if data %}
+        <p><strong>ID:</strong> {{ data.id }}</p>
+        <p><strong>Nom:</strong> {{ data.name }}</p>
+        <p><strong>Email:</strong> {{ data.email }}</p>
+    {% elif error %}
+        <p style="color: red;"><strong>Erreur:</strong> {{ error }}</p>
+    {% else %}
+        <p>Aucune donnée trouvée.</p>
+    {% endif %}
+</body>
+</html>

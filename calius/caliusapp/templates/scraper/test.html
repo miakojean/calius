@@ -1,0 +1,20 @@
+<!-- templates/test.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Test API Business</title>
+</head>
+<body>
+    <h1>Test de l'API Business</h1>
+
+    {% if app_info %}
+        <h2>Informations sur l'application :</h2>
+        <pre>{{ app_info | safe }}</pre>
+    {% elif error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% else %}
+        <p>Aucune information disponible.</p>
+    {% endif %}
+</body>
+</html>
