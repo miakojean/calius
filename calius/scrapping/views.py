@@ -46,7 +46,7 @@ def search_facebook_ads(request):
     if not query:
         return render(request, 'search.html', {'error_message': 'Veuillez entrer un terme de recherche.'})
 
-    url = "https://graph.facebook.com/v21.0/ads_archive"  # Mettez à jour vers v21.0
+    url = "https://graph.facebook.com/v21.0/ads_archive"
     params = {
         'search_terms': query,
         'ad_type': 'POLITICAL_AND_ISSUE_ADS',
@@ -57,16 +57,24 @@ def search_facebook_ads(request):
 
     try:
         response = requests.get(url, params=params)
-        response.raise_for_status()
+        response.raise_for_status()  # Gère les erreurs HTTP (codes d'erreur comme 400, 404, etc.)
         data = response.json()
-        ads = data.get('data', [])
 
-        if 'error' in data:
-            error_message = data['error']['message']
+        # Vérification s'il y a des données d'annonces et gestion d'erreurs spécifiques de l'API
+        if 'data' in data:
+            ads = data['data']
+            if not ads:
+                # Aucun résultat trouvé
+                return render(request, 'search.html', {'error_message': 'Aucune publicité trouvée pour ce terme de recherche.'})
+        elif 'error' in data:
+            # Erreur spécifique retournée par l'API
+            error_message = data['error'].get('message', 'Erreur inconnue')
             return render(request, 'search.html', {'error_message': error_message})
+        else:
+            ads = []
 
     except requests.exceptions.RequestException as e:
-        error_message = f"Une erreur s'est produite lors de la requête : {e}"
+        error_message = f"Une erreur s'est produite lors de la requête API : {e}"
         return render(request, 'search.html', {'error_message': error_message})
 
     return render(request, 'search.html', {'ads': ads, 'query': query})
@@ -111,11 +119,42 @@ def test_business_api(request):
         # Vérifier si le type de l'application est présent dans la réponse
         if 'id' in app_info:
             success_message = "L'application est configurée et a renvoyé une réponse API valide."
-            return render(request, 'test.html', {'app_info': app_info, 'message': success_message})
+            return render(request, 'scraper/test.html', {'app_info': app_info, 'message': success_message})
         else:
             error_message = "L'application ne semble pas être de type Business ou manque d'autorisations nécessaires."
-            return render(request, 'test.html', {'error_message': error_message})
+            return render(request, 'scraper/test.html', {'error_message': error_message})
 
     except requests.exceptions.RequestException as e:
         error_message = f"Erreur lors de la requête API : {e}"
         return render(request, 'scraper/test.html', {'error_message': error_message})
+
+def search_facebook_ads(request):
+    query = request.GET.get('query', '')
+
+    if not query:
+        return render(request, 'search.html', {'error_message': 'Veuillez entrer un terme de recherche.'})
+
+    url = "https://graph.facebook.com/v21.0/ads_archive"
+    params = {
+        'search_terms': query,
+        'ad_type': 'POLITICAL_AND_ISSUE_ADS',
+        'access_token': settings.META_ACCESS_TOKEN,
+        'fields': 'ad_creative_body,ad_delivery_start_time,ad_creative_link_title,demographic_distribution',
+        'limit': 10
+    }
+
+    try:
+        response = requests.get(url, params=params)
+        response.raise_for_status()
+        data = response.json()
+        ads = data.get('data', [])
+
+        if 'error' in data:
+            error_message = data['error']['message']
+            return render(request, 'search.html', {'error_message': error_message})
+
+    except requests.exceptions.RequestException as e:
+        error_message = f"Une erreur s'est produite lors de la requête : {e}"
+        return render(request, 'search.html', {'error_message': error_message})
+
+    return render(request, 'search.html', {'ads': ads, 'query': query})
